@@ -14,7 +14,10 @@
     selected: new Set(),
     locked: new Set(),
     optimal: new Set(),
-    revealed: false
+    revealed: false,
+    isFinal: false,
+    inspectedRound: 1,
+    history: []
   };
 
   var els = {
@@ -24,6 +27,13 @@
     roundText: document.getElementById("roundText"),
     selectedTotal: document.getElementById("selectedTotal"),
     optimalTotal: document.getElementById("optimalTotal"),
+    finalResults: document.getElementById("finalResults"),
+    roundResults: document.getElementById("roundResults"),
+    ownGrandTotal: document.getElementById("ownGrandTotal"),
+    optimalGrandTotal: document.getElementById("optimalGrandTotal"),
+    prevRoundButton: document.getElementById("prevRoundButton"),
+    nextRoundButton: document.getElementById("nextRoundButton"),
+    inspectRoundText: document.getElementById("inspectRoundText"),
     matrix: document.getElementById("matrix"),
     clearButton: document.getElementById("clearButton"),
     nextButton: document.getElementById("nextButton")
@@ -53,6 +63,28 @@
       total += diff(pair[0], pair[1]);
     });
     return total;
+  }
+
+  function copySet(values) {
+    return new Set(Array.from(values));
+  }
+
+  function finalRoundFor(key) {
+    for (var i = 0; i < state.history.length; i++) {
+      if (state.history[i] && state.history[i].selected.has(key)) {
+        return state.history[i].round;
+      }
+    }
+    return "";
+  }
+
+  function inspectedHistory() {
+    return state.history[state.inspectedRound - 1] || null;
+  }
+
+  function isInspectedChoice(key) {
+    var round = inspectedHistory();
+    return Boolean(round && round.selected.has(key));
   }
 
   function seedToNumber(seed) {
@@ -159,6 +191,9 @@
     state.locked = new Set();
     state.optimal = new Set();
     state.revealed = false;
+    state.isFinal = false;
+    state.inspectedRound = 1;
+    state.history = [];
     els.playerCount.value = String(state.elos.length);
     saveUrl();
     render();
@@ -188,7 +223,18 @@
     render();
   }
 
+  function recordRound() {
+    state.history[state.round - 1] = {
+      round: state.round,
+      selected: copySet(state.selected),
+      optimal: copySet(state.optimal),
+      selectedTotal: totalFor(state.selected),
+      optimalTotal: totalFor(state.optimal)
+    };
+  }
+
   function nextRound() {
+    recordRound();
     state.selected.forEach(function (key) {
       state.locked.add(key);
     });
@@ -199,7 +245,18 @@
     render();
   }
 
+  function showFinal() {
+    recordRound();
+    state.isFinal = true;
+    state.revealed = false;
+    state.inspectedRound = state.totalRounds;
+    render();
+  }
+
   function statusMessage() {
+    if (state.isFinal) {
+      return "Resultat efter alla ronder.";
+    }
     if (state.revealed) {
       if (state.round >= state.totalRounds) {
         return "Rödmarkerade par ska bort. Gröna par ingår i optimal lösning.";
@@ -218,6 +275,8 @@
     if (state.revealed && state.selected.has(key) && state.optimal.has(key)) classes.push("correct");
     if (state.revealed && state.selected.has(key) && !state.optimal.has(key)) classes.push("wrong");
     if (state.revealed && !state.selected.has(key) && state.optimal.has(key)) classes.push("missing");
+    if (state.isFinal && finalRoundFor(key)) classes.push("finalChoice");
+    if (state.isFinal && isInspectedChoice(key)) classes.push("inspectedChoice");
     return classes.join(" ");
   }
 
@@ -238,11 +297,18 @@
         var key = pairKey(r, c);
         var isDiagonal = r === c;
         var isLocked = !isDiagonal && state.locked.has(key);
+        var finalRound = state.isFinal ? finalRoundFor(key) : "";
         var button = document.createElement("button");
         button.type = "button";
         button.className = cellClass(key, isDiagonal, isLocked);
-        button.disabled = isDiagonal || isLocked || state.revealed;
-        button.textContent = isDiagonal ? "" : isLocked ? "·" : String(diff(r, c));
+        button.disabled = isDiagonal || isLocked || state.revealed || state.isFinal;
+        if (isDiagonal) {
+          button.textContent = "";
+        } else if (state.isFinal) {
+          button.textContent = finalRound ? String(finalRound) : "";
+        } else {
+          button.textContent = isLocked ? "·" : String(diff(r, c));
+        }
         button.setAttribute("aria-label", "Spelare " + (r + 1) + " mot " + (c + 1));
         button.dataset.a = String(r);
         button.dataset.b = String(c);
@@ -254,18 +320,47 @@
 
   function render() {
     var selectedComplete = state.selected.size === state.elos.length / 2;
+    var inspected = inspectedHistory();
     els.statusText.textContent = statusMessage();
-    els.roundText.textContent = state.round + "/" + state.totalRounds;
-    els.selectedTotal.textContent = String(totalFor(state.selected));
-    els.optimalTotal.textContent = state.revealed ? String(totalFor(state.optimal)) : "-";
-    els.clearButton.disabled = state.revealed || state.selected.size === 0;
+    els.roundText.textContent = state.isFinal ? state.inspectedRound + "/" + state.totalRounds : state.round + "/" + state.totalRounds;
+    els.selectedTotal.textContent = state.isFinal && inspected ? String(inspected.selectedTotal) : String(totalFor(state.selected));
+    els.optimalTotal.textContent = state.isFinal && inspected ? String(inspected.optimalTotal) : state.revealed ? String(totalFor(state.optimal)) : "-";
+    els.finalResults.hidden = !state.isFinal;
+    renderFinalResults();
+    els.clearButton.disabled = state.isFinal || state.revealed || state.selected.size === 0;
     els.nextButton.textContent = state.revealed && state.round < state.totalRounds ? "Nästa rond" : "Nästa";
-    els.nextButton.disabled = state.revealed ? false : !selectedComplete;
+    els.nextButton.disabled = state.isFinal ? true : state.revealed ? false : !selectedComplete;
     if (state.revealed && state.round >= state.totalRounds) {
+      els.nextButton.disabled = false;
+      els.nextButton.textContent = "Resultat";
+    }
+    if (state.isFinal) {
       els.nextButton.disabled = true;
       els.nextButton.textContent = "Klart";
     }
     renderMatrix();
+  }
+
+  function renderFinalResults() {
+    if (!state.isFinal) return;
+    var ownTotal = 0;
+    var optimalTotal = 0;
+    els.roundResults.innerHTML = "";
+    state.history.forEach(function (round) {
+      ownTotal += round.selectedTotal;
+      optimalTotal += round.optimalTotal;
+      var row = document.createElement("div");
+      row.className = "roundResult";
+      if (round.round === state.inspectedRound) row.className += " inspected";
+      row.innerHTML = "<span>Rond " + round.round + "</span><strong>" +
+        round.selectedTotal + " / " + round.optimalTotal + "</strong>";
+      els.roundResults.appendChild(row);
+    });
+    els.ownGrandTotal.textContent = String(ownTotal);
+    els.optimalGrandTotal.textContent = String(optimalTotal);
+    els.inspectRoundText.textContent = "Rond " + state.inspectedRound;
+    els.prevRoundButton.disabled = state.inspectedRound <= 1;
+    els.nextRoundButton.disabled = state.inspectedRound >= state.totalRounds;
   }
 
   function div(className, text) {
@@ -295,11 +390,25 @@
       render();
     });
 
+    els.prevRoundButton.addEventListener("click", function () {
+      if (!state.isFinal || state.inspectedRound <= 1) return;
+      state.inspectedRound -= 1;
+      render();
+    });
+
+    els.nextRoundButton.addEventListener("click", function () {
+      if (!state.isFinal || state.inspectedRound >= state.totalRounds) return;
+      state.inspectedRound += 1;
+      render();
+    });
+
     els.nextButton.addEventListener("click", function () {
       if (!state.revealed) {
         reveal();
       } else if (state.round < state.totalRounds) {
         nextRound();
+      } else {
+        showFinal();
       }
     });
   }

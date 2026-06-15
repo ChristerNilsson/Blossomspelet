@@ -37,6 +37,16 @@ Nu visas samma matris, men valen man gjort tidigare är inte tillgängliga.
 De visas med en punkt, "·"
 Antalet ronder är den upprundade tvålogaritmen av n. T ex 10 => 3
 
+### Final
+
+Då man klarat av alla ronderna, visas resultatet upp.
+Detta innebär att rondernas delsummor visas upp samt den egna totalen.
+Även optimum visas.
+Man ska här kunna välja att inspektera de tidigare ronderna.
+Därför finns knapparna, *rond-1* och *rond+1*
+
+Matrisen innehåller nu enbart rondnummer för spelarens val. n=10 innebär att cellerna innehåller siffrorna 1..3.
+
 ### Url
 
 Urlen innehåller det frö som skapar elolistan, samt antalet spelare.
