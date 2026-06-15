@@ -341,10 +341,11 @@
     state.history.forEach(function (round) {
       ownTotal += round.selectedTotal;
       optimalTotal += round.optimalTotal;
-      var inspected = round.round === state.inspectedRound ? " class=\"inspected\"" : "";
-      header.push("<th" + inspected + ">rond " + round.round + "</th>");
-      player.push("<td" + inspected + ">" + round.selectedTotal + "</td>");
-      optimum.push("<td" + inspected + ">" + round.optimalTotal + "</td>");
+      var inspected = round.round === state.inspectedRound ? " inspected" : "";
+      var roundAttr = " class=\"roundCell" + inspected + "\" data-round=\"" + round.round + "\"";
+      header.push("<th" + roundAttr + ">rond " + round.round + "</th>");
+      player.push("<td" + roundAttr + ">" + round.selectedTotal + "</td>");
+      optimum.push("<td" + roundAttr + ">" + round.optimalTotal + "</td>");
     });
     header.push("<th>total</th>");
     player.push("<td>" + ownTotal + "</td>");
@@ -382,6 +383,14 @@
 
     els.clearButton.addEventListener("click", function () {
       state.selected = new Set();
+      render();
+    });
+
+    els.roundResults.addEventListener("click", function (event) {
+      if (!state.isFinal) return;
+      var target = event.target.closest("[data-round]");
+      if (!target) return;
+      state.inspectedRound = Number(target.dataset.round);
       render();
     });
 

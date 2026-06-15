@@ -149,6 +149,14 @@ p {
   text-align: left;
 }
 
+.statsTable .roundCell {
+  cursor: pointer;
+}
+
+.statsTable .roundCell:hover {
+  background: #f1f8ff;
+}
+
 .statsTable .inspected {
   background: #e4f4ff;
   color: #123a50;

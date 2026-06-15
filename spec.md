@@ -48,6 +48,8 @@ Antalet ronder är den upprundade tvålogaritmen av n. T ex 10 => 3
 
 ### Final
 
+Klick i tabellen ska välja rond.
+
 Då man klarat av alla ronderna, visas resultatet upp.
 Detta innebär att rondernas delsummor visas upp samt den egna totalen.
 Även optimum visas.
@@ -56,7 +58,6 @@ Därför finns knapparna, *rond-1* och *rond+1*
 
 Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd, gul och grönmarkering som tidigare.
 Här visas bara elodiffar i cellerna.
-
 
 ```
 Din total
