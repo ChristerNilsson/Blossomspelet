@@ -50,7 +50,7 @@
     var total = 0;
     keys.forEach(function (key) {
       var pair = parsePairKey(key);
-      total += squaredDiff(pair[0], pair[1]);
+      total += diff(pair[0], pair[1]);
     });
     return total;
   }

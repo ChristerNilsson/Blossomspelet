@@ -29,6 +29,7 @@ Enbart entalssiffran visas
 Längst till höger visas elotalen.
 Då man tror sig ha ett minimum klickar man på *Nästa* och då visas en optimal lösning.
 (Rödmarkera celler som sk bort, grönmarkera celler som ska in)
+Summan som visas ska vara den okvadrerade.
 
 ### Rond
 
