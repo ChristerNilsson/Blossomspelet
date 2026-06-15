@@ -50,9 +50,8 @@
     return Math.abs(state.elos[a] - state.elos[b]);
   }
 
-  function squaredDiff(a, b) {
-    var value = diff(a, b);
-    return value * value;
+  function weightedDiff(a, b) {
+    return Math.pow(diff(a, b), 1.01);
   }
 
   function totalFor(keys) {
@@ -150,12 +149,12 @@
   }
 
   function computeOptimal() {
-    var maxSquaredDiff = Math.pow(MAX_ELO - MIN_ELO, 2);
+    var maxWeightedDiff = Math.pow(MAX_ELO - MIN_ELO, 1.01);
     var edges = [];
     for (var i = 0; i < state.elos.length; i++) {
       for (var j = i + 1; j < state.elos.length; j++) {
         if (!state.locked.has(pairKey(i, j))) {
-          edges.push([i, j, maxSquaredDiff - squaredDiff(i, j)]);
+          edges.push([i, j, maxWeightedDiff - weightedDiff(i, j)]);
         }
       }
     }

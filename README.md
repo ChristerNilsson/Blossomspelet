@@ -32,4 +32,4 @@ URL:en innehåller antal spelare och ett frö som skapar Elo-listan. Skicka URL:
 
 ## Teknisk notis
 
-Optimeringen använder Blossom-algoritmen via `blossom.js`. Algoritmen minimerar kvadrerad Elo-skillnad för att undvika ojämna outliers, medan appen visar och summerar okvadrerade absoluta Elo-differenser.
+Optimeringen använder Blossom-algoritmen via `blossom.js`. 

@@ -21,9 +21,9 @@ n väljes ur en lista med jämna tal 4 .. 20
 ### En rond
 
 En matris med möjliga celler visas.  
-I varje cell befinner sig den kvadrerade skillnaden mellan de två elo-talen, **centrerad**.  
+I varje cell befinner sig skillnaden mellan de två elo-talen, upphöjd till 1.01
 Detta för få jämnast möjliga par. Inga outliers.  
-Dock visas den okvadrerade, absoluta diffen.  
+Dock visas den absoluta diffen, ej upphöjd till 1.01
 Då man klickar på en cell (x,y) markeras samtidigt (y,x).
 Klickar man igen, avmarkeras de båda cellerna.
 Man kan inte klicka på diagonalen.
@@ -33,7 +33,7 @@ Enbart entalssiffran visas
 Längst till höger visas elotalen.
 Då man tror sig ha ett minimum klickar man på *Nästa* och då visas en optimal lösning.
 (Rödmarkera celler som ska bort, grönmarkera celler som ska in, gulmarkera celler där spelaren valt optimum.)
-Summan som visas ska vara den okvadrerade.
+Summan som visas ska vara den oupphöjda.
 
 ### Rond
 
