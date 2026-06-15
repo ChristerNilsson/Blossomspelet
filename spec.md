@@ -142,20 +142,6 @@ Vid inspektion ska matrisen visa:
 - röd, gul och grön markering enligt färgreglerna,
 - endast vanlig `diff` i cellerna.
 
-## Saker som inte ska finnas
-
-Följande separata paneler ska inte finnas, eftersom resultatpanelen ersätter dem:
-
-- `Rond`
-- `Vald summa`
-- `optimal summa`
-
-Följande knappar ska inte finnas:
-
-- `Rond -1`
-- `Rond 1`
-- `Rond +1`
-
 ## Acceptanskriterier
 
 - En ny användare ska kunna förstå spelets mål via README och status-texten i appen.

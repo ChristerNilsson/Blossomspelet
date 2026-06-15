@@ -332,9 +332,10 @@
     var saved = state.history[roundNumber - 1];
     if (saved) return saved;
     if (!state.isFinal && roundNumber === state.round) {
+      var complete = state.selected.size === state.elos.length / 2;
       return {
         round: roundNumber,
-        selectedTotal: state.selected.size > 0 ? totalFor(state.selected) : null,
+        selectedTotal: complete ? totalFor(state.selected) : null,
         optimalTotal: state.revealed ? totalFor(state.optimal) : null
       };
     }
