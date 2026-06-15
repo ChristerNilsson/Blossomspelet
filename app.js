@@ -87,6 +87,11 @@
     return Boolean(round && round.selected.has(key));
   }
 
+  function isInspectedOptimal(key) {
+    var round = inspectedHistory();
+    return Boolean(round && round.optimal.has(key));
+  }
+
   function seedToNumber(seed) {
     var hash = 2166136261;
     for (var i = 0; i < seed.length; i++) {
@@ -270,14 +275,38 @@
     var classes = ["cell"];
     if (isDiagonal) classes.push("diagonal");
     if (isLocked) classes.push("locked");
-    if (!isDiagonal && !isLocked && !state.revealed) classes.push("clickable");
-    if (state.selected.has(key)) classes.push("selected");
-    if (state.revealed && state.selected.has(key) && state.optimal.has(key)) classes.push("correct");
-    if (state.revealed && state.selected.has(key) && !state.optimal.has(key)) classes.push("wrong");
-    if (state.revealed && !state.selected.has(key) && state.optimal.has(key)) classes.push("missing");
+    if (!isDiagonal && !isLocked && !state.revealed && !state.isFinal) classes.push("clickable");
+    if (!state.isFinal && state.selected.has(key)) classes.push("selected");
+    if (!state.isFinal && state.revealed && state.selected.has(key) && state.optimal.has(key)) classes.push("correct");
+    if (!state.isFinal && state.revealed && state.selected.has(key) && !state.optimal.has(key)) classes.push("wrong");
+    if (!state.isFinal && state.revealed && !state.selected.has(key) && state.optimal.has(key)) classes.push("missing");
     if (state.isFinal && finalRoundFor(key)) classes.push("finalChoice");
-    if (state.isFinal && isInspectedChoice(key)) classes.push("inspectedChoice");
+    if (state.isFinal && isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("correct");
+    if (state.isFinal && isInspectedChoice(key) && !isInspectedOptimal(key)) classes.push("wrong");
+    if (state.isFinal && !isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("missing");
     return classes.join(" ");
+  }
+
+  function renderCellContent(button, r, c, isDiagonal, isLocked, finalRound) {
+    button.textContent = "";
+    if (isDiagonal) return;
+    if (!state.isFinal) {
+      button.textContent = isLocked ? "·" : String(diff(r, c));
+      return;
+    }
+
+    var value = document.createElement("span");
+    value.className = "cellValue";
+    value.textContent = String(diff(r, c));
+    button.appendChild(value);
+
+    if (finalRound) {
+      var badge = document.createElement("span");
+      badge.className = "roundBadge";
+      if (Number(finalRound) === state.inspectedRound) badge.className += " inspected";
+      badge.textContent = String(finalRound);
+      button.appendChild(badge);
+    }
   }
 
   function renderMatrix() {
@@ -302,13 +331,7 @@
         button.type = "button";
         button.className = cellClass(key, isDiagonal, isLocked);
         button.disabled = isDiagonal || isLocked || state.revealed || state.isFinal;
-        if (isDiagonal) {
-          button.textContent = "";
-        } else if (state.isFinal) {
-          button.textContent = finalRound ? String(finalRound) : "";
-        } else {
-          button.textContent = isLocked ? "·" : String(diff(r, c));
-        }
+        renderCellContent(button, r, c, isDiagonal, isLocked, finalRound);
         button.setAttribute("aria-label", "Spelare " + (r + 1) + " mot " + (c + 1));
         button.dataset.a = String(r);
         button.dataset.b = String(c);

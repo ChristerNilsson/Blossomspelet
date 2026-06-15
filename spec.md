@@ -45,7 +45,8 @@ Detta innebär att rondernas delsummor visas upp samt den egna totalen.
 Man ska här kunna välja att inspektera de tidigare ronderna.
 Därför finns knapparna, *rond-1* och *rond+1*
 
-Matrisen innehåller nu enbart rondnummer för spelarens val. n=10 innebär att cellerna innehåller siffrorna 1..3.
+Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd och grönmarkering som tidigare.
+Här visas både elodiffar och rondummer i cellerna. Markera med t ex färg vad som är rondnummer.
 
 ### Url
 
