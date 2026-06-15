@@ -17,7 +17,7 @@ n väljes ur en lista med jämna tal 4 .. 50
 ### En rond
 
 En matris med möjliga celler visas.  
-I varje cell befinner sig den kvadrerade skillnaden mellan de två elo-talen, centrerad.  
+I varje cell befinner sig den kvadrerade skillnaden mellan de två elo-talen, **centrerad**.  
 Detta för få jämnast möjliga par. Inga outliers.  
 Dock visas den okvadrerade, absoluta diffen.  
 Då man klickar på en cell (x,y) markeras samtidigt (y,x).
@@ -28,7 +28,7 @@ Axlarna numreras med talen 1..n.
 Enbart entalssiffran visas
 Längst till höger visas elotalen.
 Då man tror sig ha ett minimum klickar man på *Nästa* och då visas en optimal lösning.
-(Rödmarkera celler som sk bort, grönmarkera celler som ska in. Oförändrad cell markeras med gult)
+(Rödmarkera celler som ska bort, grönmarkera celler som ska in, gulmarkera celler där spelaren valt optimum.)
 Summan som visas ska vara den okvadrerade.
 
 ### Rond
@@ -45,14 +45,30 @@ Detta innebär att rondernas delsummor visas upp samt den egna totalen.
 Man ska här kunna välja att inspektera de tidigare ronderna.
 Därför finns knapparna, *rond-1* och *rond+1*
 
-Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd och grönmarkering som tidigare.
+Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd, gul och grönmarkering som tidigare.
 Här visas bara elodiffar i cellerna.
 
-Visa statistiken som tre rader
+Byt
+
 ```
-          r1 r2 r3 totalt
-Spelaren  10 15 20   45
-Optimum    8 12 20   40 
+Din total
+1627
+Optimum
+1221
+Rond 1
+267 / 267
+Rond 2
+781 / 477
+Rond 3
+579 / 477
+```
+
+mot 
+
+```
+          rond 1 rond 2 rond 3 total
+Mina val   267    781    579    1627
+Optimum    267    477    477    1221
 ```
 
 ## Url

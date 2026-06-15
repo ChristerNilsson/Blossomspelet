@@ -344,17 +344,17 @@
     var ownTotal = 0;
     var optimalTotal = 0;
     var header = ["<th></th>"];
-    var player = ["<th>Spelaren</th>"];
+    var player = ["<th>Mina val</th>"];
     var optimum = ["<th>Optimum</th>"];
     state.history.forEach(function (round) {
       ownTotal += round.selectedTotal;
       optimalTotal += round.optimalTotal;
       var inspected = round.round === state.inspectedRound ? " class=\"inspected\"" : "";
-      header.push("<th" + inspected + ">r" + round.round + "</th>");
+      header.push("<th" + inspected + ">rond " + round.round + "</th>");
       player.push("<td" + inspected + ">" + round.selectedTotal + "</td>");
       optimum.push("<td" + inspected + ">" + round.optimalTotal + "</td>");
     });
-    header.push("<th>totalt</th>");
+    header.push("<th>total</th>");
     player.push("<td>" + ownTotal + "</td>");
     optimum.push("<td>" + optimalTotal + "</td>");
     els.roundResults.innerHTML = "<table class=\"statsTable\"><thead><tr>" +
