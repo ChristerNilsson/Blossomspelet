@@ -12,7 +12,7 @@ Elotalen ligger i intervallet 1400..2400, normalfördelat.
 
 ## Input
 
-n väljes ur en lista med jämna tal 4 .. 50
+n väljes ur en lista med jämna tal 4 .. 20
 
 ## GUI
 
@@ -50,7 +50,7 @@ Därför finns knapparna, *rond-1* och *rond+1*
 Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd, gul och grönmarkering som tidigare.
 Här visas bara elodiffar i cellerna.
 
-Tag bort de tre redundanta panelerna Rond, Vald summa, optimal summa.
+MISSA INTE: Tag bort de tre redundanta panelerna med rubrikerna *Rond*, *Vald summa*, *optimal summa*.
 
 Byt
 

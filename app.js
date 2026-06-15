@@ -4,7 +4,7 @@
   var MIN_ELO = 1400;
   var MAX_ELO = 2400;
   var N_VALUES = [];
-  for (var n = 4; n <= 50; n += 2) N_VALUES.push(n);
+  for (var n = 4; n <= 20; n += 2) N_VALUES.push(n);
 
   var state = {
     seed: "",
