@@ -46,7 +46,7 @@ Man ska här kunna välja att inspektera de tidigare ronderna.
 Därför finns knapparna, *rond-1* och *rond+1*
 
 Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd och grönmarkering som tidigare.
-Här visas både elodiffar och rondummer i cellerna. Markera med t ex färg vad som är rondnummer.
+Här visas bara elodiffar i cellerna.
 
 ### Url
 

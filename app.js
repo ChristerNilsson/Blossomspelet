@@ -69,15 +69,6 @@
     return new Set(Array.from(values));
   }
 
-  function finalRoundFor(key) {
-    for (var i = 0; i < state.history.length; i++) {
-      if (state.history[i] && state.history[i].selected.has(key)) {
-        return state.history[i].round;
-      }
-    }
-    return "";
-  }
-
   function inspectedHistory() {
     return state.history[state.inspectedRound - 1] || null;
   }
@@ -280,33 +271,20 @@
     if (!state.isFinal && state.revealed && state.selected.has(key) && state.optimal.has(key)) classes.push("correct");
     if (!state.isFinal && state.revealed && state.selected.has(key) && !state.optimal.has(key)) classes.push("wrong");
     if (!state.isFinal && state.revealed && !state.selected.has(key) && state.optimal.has(key)) classes.push("missing");
-    if (state.isFinal && finalRoundFor(key)) classes.push("finalChoice");
     if (state.isFinal && isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("correct");
     if (state.isFinal && isInspectedChoice(key) && !isInspectedOptimal(key)) classes.push("wrong");
     if (state.isFinal && !isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("missing");
     return classes.join(" ");
   }
 
-  function renderCellContent(button, r, c, isDiagonal, isLocked, finalRound) {
+  function renderCellContent(button, r, c, isDiagonal, isLocked) {
     button.textContent = "";
     if (isDiagonal) return;
     if (!state.isFinal) {
       button.textContent = isLocked ? "·" : String(diff(r, c));
       return;
     }
-
-    var value = document.createElement("span");
-    value.className = "cellValue";
-    value.textContent = String(diff(r, c));
-    button.appendChild(value);
-
-    if (finalRound) {
-      var badge = document.createElement("span");
-      badge.className = "roundBadge";
-      if (Number(finalRound) === state.inspectedRound) badge.className += " inspected";
-      badge.textContent = String(finalRound);
-      button.appendChild(badge);
-    }
+    button.textContent = String(diff(r, c));
   }
 
   function renderMatrix() {
@@ -326,12 +304,11 @@
         var key = pairKey(r, c);
         var isDiagonal = r === c;
         var isLocked = !isDiagonal && state.locked.has(key);
-        var finalRound = state.isFinal ? finalRoundFor(key) : "";
         var button = document.createElement("button");
         button.type = "button";
         button.className = cellClass(key, isDiagonal, isLocked);
         button.disabled = isDiagonal || isLocked || state.revealed || state.isFinal;
-        renderCellContent(button, r, c, isDiagonal, isLocked, finalRound);
+        renderCellContent(button, r, c, isDiagonal, isLocked);
         button.setAttribute("aria-label", "Spelare " + (r + 1) + " mot " + (c + 1));
         button.dataset.a = String(r);
         button.dataset.b = String(c);
