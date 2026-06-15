@@ -1,5 +1,35 @@
 # Blossomspelet
 
-Ett webbaserat spel där man parar spelare så att summan av absoluta Elo-differenser blir så liten som möjligt.
+Blossomspelet är ett webbaserat spel där du parar spelare så att Elo-skillnaderna blir så jämna som möjligt. Appen skapar en slumpad Elo-lista, visar en matris med skillnader mellan alla spelare och jämför dina val med en optimal lösning.
 
-Öppna `index.html` i en webbläsare. Antal spelare och frö sparas i URL:en när listan skapas, så länken kan delas.
+## Kom igång
+
+Öppna `index.html` i en webbläsare. Ingen installation eller server behövs.
+
+Välj antal spelare i listan. Tillåtna värden är jämna tal från 4 till 20. Klicka `Ny lista` om du vill skapa en ny Elo-lista.
+
+## Så spelar du
+
+Spelarna är sorterade med starkaste spelaren högst upp och längst till vänster. Axlarna visar spelarens nummer, men bara entalssiffran. Elo-talet visas längst till höger.
+
+Klicka på en cell för att välja paret. Samma par markeras automatiskt i spegelcellen. Klicka igen för att ta bort valet. Diagonalen kan inte väljas.
+
+När du har valt en komplett parning klickar du `Nästa`. Då visas den optimala lösningen för ronden:
+
+- Röd: ditt val ska bort.
+- Grön: optimalt par som saknas i ditt val.
+- Gul: ditt val är också optimalt.
+
+I nästa rond visas samma matris, men tidigare valda par är blockerade och visas med en punkt.
+
+## Final
+
+Efter sista ronden visas en resultatvy. Tabellen visar dina delsummor, optimum per rond och totalerna. Med `rond-1` och `rond+1` kan du inspektera tidigare ronder. Matrisen visar då Elo-differenserna och markerar dina val mot optimum med samma röd/gul/grön logik.
+
+## Delbar länk
+
+URL:en innehåller antal spelare och ett frö som skapar Elo-listan. Skicka URL:en till någon annan för att låta dem spela samma lista.
+
+## Teknisk notis
+
+Optimeringen använder Blossom-algoritmen via `blossom.js`. Algoritmen minimerar kvadrerad Elo-skillnad för att undvika ojämna outliers, medan appen visar och summerar okvadrerade absoluta Elo-differenser.

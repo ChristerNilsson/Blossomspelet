@@ -4,6 +4,7 @@ UTF-8
 Ska även fungera på iPad.
 Heltalen i matrisens celler ska alltid vara centrerade
 Inga celler ska vara utgråade.
+Skapa en readme till nya användare. Den ska kunna innehålla åäö.
 
 ## Målsättning
 
