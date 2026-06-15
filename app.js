@@ -258,7 +258,7 @@
       }
       return "Rödmarkerade par ska bort. Gröna par ingår i optimal lösning inför nästa rond.";
     }
-    return "Klicka par i matrisen. Samma val markeras åt båda håll.";
+    return "Målet är att para ihop alla spelare så jämnt som möjligt. Välj par i matrisen tills alla spelare ingår en gång.";
   }
 
   function cellClass(key, isDiagonal, isLocked) {
