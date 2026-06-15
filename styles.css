@@ -254,8 +254,9 @@ p {
 }
 
 .cell.locked {
-  background: var(--locked);
-  color: #9aa59d;
+  background: #fbfcfb;
+  color: var(--text);
+  border-color: var(--line-strong);
   border-style: dashed;
   font-size: 1.15rem;
 }

@@ -3,6 +3,7 @@
 UTF-8
 Ska även fungera på iPad.
 Heltalen i matrisens celler ska alltid vara centrerade
+Inga celler ska vara utgråade.
 
 ## Målsättning
 
