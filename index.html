@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blossomspelet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <h1>Blossomspelet</h1>
+        <p id="statusText">Välj antal spelare och börja para.</p>
+      </div>
+      <div class="controls" aria-label="Inställningar">
+        <label for="playerCount">Spelare</label>
+        <select id="playerCount"></select>
+        <button id="newGameButton" type="button">Ny lista</button>
+      </div>
+    </header>
+
+    <section class="summary" aria-label="Rondinformation">
+      <div>
+        <span>Rond</span>
+        <strong id="roundText">1/1</strong>
+      </div>
+      <div>
+        <span>Vald kostnad</span>
+        <strong id="selectedTotal">0</strong>
+      </div>
+      <div>
+        <span>Optimal kostnad</span>
+        <strong id="optimalTotal">-</strong>
+      </div>
+    </section>
+
+    <section class="boardShell" aria-label="Elo-matris">
+      <div id="matrix" class="matrix"></div>
+    </section>
+
+    <footer class="actionbar">
+      <button id="clearButton" type="button">Rensa val</button>
+      <button id="nextButton" type="button">Nästa</button>
+    </footer>
+  </main>
+
+  <script src="blossom.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f7f4;
+  --panel: #ffffff;
+  --text: #142018;
+  --muted: #607064;
+  --line: #cdd7cf;
+  --line-strong: #9eb0a4;
+  --accent: #235c96;
+  --accent-pressed: #184977;
+  --selected: #dcecff;
+  --selected-border: #2d6fb0;
+  --good: #cdeed7;
+  --good-border: #2f8b4f;
+  --bad: #ffd7d2;
+  --bad-border: #b84235;
+  --locked: #eef0ed;
+  --shadow: 0 12px 30px rgba(20, 32, 24, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+button {
+  min-height: 44px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 0 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button:not(:disabled):active {
+  background: var(--accent-pressed);
+}
+
+select {
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  padding: 0 34px 0 12px;
+}
+
+.app {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
+  line-height: 1.05;
+}
+
+p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.controls,
+.actionbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.summary > div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+}
+
+.summary span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.summary strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 1.35rem;
+}
+
+.boardShell {
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  -webkit-overflow-scrolling: touch;
+}
+
+.matrix {
+  --cell-size: 46px;
+  display: grid;
+  grid-template-columns: 42px repeat(var(--players), var(--cell-size)) 70px;
+  width: max-content;
+  min-width: 100%;
+  padding: 12px;
+  gap: 3px;
+}
+
+.corner,
+.axis,
+.elo,
+.cell {
+  min-width: 0;
+  height: var(--cell-size);
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+}
+
+.axis,
+.elo {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.rowAxis {
+  justify-content: end;
+  padding-right: 9px;
+}
+
+.elo {
+  justify-content: start;
+  padding-left: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cell {
+  border: 1px solid var(--line);
+  background: #fbfcfb;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  touch-action: manipulation;
+}
+
+.cell.clickable {
+  cursor: pointer;
+}
+
+.cell.clickable:focus-visible {
+  outline: 3px solid rgba(35, 92, 150, 0.35);
+  outline-offset: 1px;
+}
+
+.cell.diagonal {
+  border-color: transparent;
+  background: transparent;
+}
+
+.cell.locked {
+  background: var(--locked);
+  color: #9aa59d;
+  border-style: dashed;
+  font-size: 1.15rem;
+}
+
+.cell.selected {
+  background: var(--selected);
+  border-color: var(--selected-border);
+  box-shadow: inset 0 0 0 1px var(--selected-border);
+}
+
+.cell.correct,
+.cell.missing {
+  background: var(--good);
+  border-color: var(--good-border);
+  box-shadow: inset 0 0 0 2px var(--good-border);
+}
+
+.cell.wrong {
+  background: var(--bad);
+  border-color: var(--bad-border);
+  box-shadow: inset 0 0 0 2px var(--bad-border);
+}
+
+.actionbar {
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+#clearButton {
+  background: #fff;
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .app {
+    padding: 12px;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .controls,
+  .actionbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .controls label {
+    grid-column: 1 / -1;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .matrix {
+    --cell-size: 40px;
+    grid-template-columns: 34px repeat(var(--players), var(--cell-size)) 62px;
+    padding: 8px;
+  }
+
+  .cell {
+    font-size: 0.76rem;
+  }
+}
