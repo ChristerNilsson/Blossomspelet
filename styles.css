@@ -232,6 +232,7 @@ p {
   font-variant-numeric: tabular-nums;
   touch-action: manipulation;
   position: relative;
+  padding: 0;
 }
 
 .cell:disabled {
