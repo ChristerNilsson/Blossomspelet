@@ -49,6 +49,10 @@ Antalet ronder är den upprundade tvålogaritmen av n. T ex 10 => 3
 ### Final
 
 Klick i tabellen ska välja rond.
+Därför kan tre knappar tas bort:
+* Rond -1
+* Rond x
+* Rond +1
 
 Då man klarat av alla ronderna, visas resultatet upp.
 Detta innebär att rondernas delsummor visas upp samt den egna totalen.

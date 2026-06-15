@@ -26,9 +26,6 @@
     statusText: document.getElementById("statusText"),
     finalResults: document.getElementById("finalResults"),
     roundResults: document.getElementById("roundResults"),
-    prevRoundButton: document.getElementById("prevRoundButton"),
-    nextRoundButton: document.getElementById("nextRoundButton"),
-    inspectRoundText: document.getElementById("inspectRoundText"),
     matrix: document.getElementById("matrix"),
     clearButton: document.getElementById("clearButton"),
     nextButton: document.getElementById("nextButton")
@@ -354,9 +351,6 @@
       header.join("") + "</tr></thead><tbody><tr>" +
       player.join("") + "</tr><tr>" +
       optimum.join("") + "</tr></tbody></table>";
-    els.inspectRoundText.textContent = "Rond " + state.inspectedRound;
-    els.prevRoundButton.disabled = state.inspectedRound <= 1;
-    els.nextRoundButton.disabled = state.inspectedRound >= state.totalRounds;
   }
 
   function div(className, text) {
@@ -391,18 +385,6 @@
       var target = event.target.closest("[data-round]");
       if (!target) return;
       state.inspectedRound = Number(target.dataset.round);
-      render();
-    });
-
-    els.prevRoundButton.addEventListener("click", function () {
-      if (!state.isFinal || state.inspectedRound <= 1) return;
-      state.inspectedRound -= 1;
-      render();
-    });
-
-    els.nextRoundButton.addEventListener("click", function () {
-      if (!state.isFinal || state.inspectedRound >= state.totalRounds) return;
-      state.inspectedRound += 1;
       render();
     });
 

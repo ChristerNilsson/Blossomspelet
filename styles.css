@@ -162,19 +162,6 @@ p {
   color: #123a50;
 }
 
-.finalNav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.finalNav strong {
-  min-width: 86px;
-  text-align: center;
-}
-
 .boardShell {
   overflow: auto;
   border: 1px solid var(--line);
@@ -305,16 +292,9 @@ p {
   }
 
   .controls,
-  .actionbar,
-  .finalNav {
+  .actionbar {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
-
-  .finalNav strong {
-    grid-column: 1 / -1;
-    order: -1;
-    min-width: 0;
   }
 
   .controls label {
