@@ -12,6 +12,11 @@ Tag bort de tre redundanta panelerna med följande rubriker:
 * Vald summa
 * optimal summa
 
+Tag bort tre redundanta knappar:
+* Rond -1
+* Rond 1
+* Rond +1
+
 ## Målsättning
 
 Ur en lista med el0-tal, ska de par väljas ut som minimerar den absoluta elo-differensen.
@@ -49,10 +54,6 @@ Antalet ronder är den upprundade tvålogaritmen av n. T ex 10 => 3
 ### Final
 
 Klick i tabellen ska välja rond.
-Därför kan tre knappar tas bort:
-* Rond -1
-* Rond x
-* Rond +1
 
 Då man klarat av alla ronderna, visas resultatet upp.
 Detta innebär att rondernas delsummor visas upp samt den egna totalen.
