@@ -332,15 +332,15 @@
     if (!state.isFinal) return;
     var ownTotal = 0;
     var optimalTotal = 0;
-    var header = ["<th></th>"];
-    var player = ["<th>Mina val</th>"];
-    var optimum = ["<th>Optimum</th>"];
+    var header = ["<th>Rond</th>"];
+    var player = ["<th>Min summa</th>"];
+    var optimum = ["<th>Optimal summa</th>"];
     state.history.forEach(function (round) {
       ownTotal += round.selectedTotal;
       optimalTotal += round.optimalTotal;
       var inspected = round.round === state.inspectedRound ? " inspected" : "";
       var roundAttr = " class=\"roundCell" + inspected + "\" data-round=\"" + round.round + "\"";
-      header.push("<th" + roundAttr + ">rond " + round.round + "</th>");
+      header.push("<th" + roundAttr + ">" + round.round + "</th>");
       player.push("<td" + roundAttr + ">" + round.selectedTotal + "</td>");
       optimum.push("<td" + roundAttr + ">" + round.optimalTotal + "</td>");
     });

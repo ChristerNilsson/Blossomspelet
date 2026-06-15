@@ -243,7 +243,6 @@ p {
   color: var(--text);
   border-color: var(--line-strong);
   border-style: dashed;
-  font-size: 1.15rem;
 }
 
 .cell.selected {

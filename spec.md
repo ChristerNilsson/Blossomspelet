@@ -1,5 +1,12 @@
 # Blossomspelet
 
+Byt `Mina val` till `Min summa`
+Byt `Optimum` till `Optimal summa`
+
+Byt `Rond 1  Rond 2  Rond 2` till `Rond  1  2  3`
+
+Alla celler ska ha samma storlek på texten.
+
 UTF-8
 Ska även fungera på iPad.
 Heltalen i matrisens celler ska alltid vara centrerade

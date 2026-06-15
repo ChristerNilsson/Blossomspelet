@@ -24,7 +24,7 @@ I nästa rond visas samma matris, men tidigare valda par är blockerade och visa
 
 ## Final
 
-Efter sista ronden visas en resultatvy. Tabellen visar dina delsummor, optimum per rond och totalerna. Med `rond-1` och `rond+1` kan du inspektera tidigare ronder. Matrisen visar då Elo-differenserna och markerar dina val mot optimum med samma röd/gul/grön logik.
+Efter sista ronden visas en resultatvy. Tabellen visar din summa, optimal summa per rond och totalerna. Klicka på en rond i tabellen för att inspektera den. Matrisen visar då Elo-differenserna och markerar dina val mot optimum med samma röd/gul/grön logik.
 
 ## Delbar länk
 
