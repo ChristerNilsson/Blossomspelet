@@ -17,7 +17,7 @@ n väljes ur en lista med jämna tal 4 .. 50
 ### En rond
 
 En matris med möjliga celler visas.  
-I varje cell befinner sig den kvadrerade skillnaden mellan de två elo-talen.  
+I varje cell befinner sig den kvadrerade skillnaden mellan de två elo-talen, centrerad.  
 Detta för få jämnast möjliga par. Inga outliers.  
 Dock visas den okvadrerade, absoluta diffen.  
 Då man klickar på en cell (x,y) markeras samtidigt (y,x).
@@ -28,7 +28,7 @@ Axlarna numreras med talen 1..n.
 Enbart entalssiffran visas
 Längst till höger visas elotalen.
 Då man tror sig ha ett minimum klickar man på *Nästa* och då visas en optimal lösning.
-(Rödmarkera celler som sk bort, grönmarkera celler som ska in)
+(Rödmarkera celler som sk bort, grönmarkera celler som ska in. Oförändrad cell markeras med gult)
 Summan som visas ska vara den okvadrerade.
 
 ### Rond
@@ -48,11 +48,18 @@ Därför finns knapparna, *rond-1* och *rond+1*
 Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd och grönmarkering som tidigare.
 Här visas bara elodiffar i cellerna.
 
-### Url
+Visa statistiken som tre rader
+```
+          r1 r2 r3 totalt
+Spelaren  10 15 20   45
+Optimum    8 12 20   40 
+```
+
+## Url
 
 Urlen innehåller det frö som skapar elolistan, samt antalet spelare.
 Man ska alltså kunna ge urlen till en kompis.
 
-### Algoritm
+## Algoritm
 
 Blossom

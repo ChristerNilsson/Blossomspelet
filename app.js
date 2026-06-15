@@ -29,8 +29,6 @@
     optimalTotal: document.getElementById("optimalTotal"),
     finalResults: document.getElementById("finalResults"),
     roundResults: document.getElementById("roundResults"),
-    ownGrandTotal: document.getElementById("ownGrandTotal"),
-    optimalGrandTotal: document.getElementById("optimalGrandTotal"),
     prevRoundButton: document.getElementById("prevRoundButton"),
     nextRoundButton: document.getElementById("nextRoundButton"),
     inspectRoundText: document.getElementById("inspectRoundText"),
@@ -268,10 +266,10 @@
     if (isLocked) classes.push("locked");
     if (!isDiagonal && !isLocked && !state.revealed && !state.isFinal) classes.push("clickable");
     if (!state.isFinal && state.selected.has(key)) classes.push("selected");
-    if (!state.isFinal && state.revealed && state.selected.has(key) && state.optimal.has(key)) classes.push("correct");
+    if (!state.isFinal && state.revealed && state.selected.has(key) && state.optimal.has(key)) classes.push("unchanged");
     if (!state.isFinal && state.revealed && state.selected.has(key) && !state.optimal.has(key)) classes.push("wrong");
     if (!state.isFinal && state.revealed && !state.selected.has(key) && state.optimal.has(key)) classes.push("missing");
-    if (state.isFinal && isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("correct");
+    if (state.isFinal && isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("unchanged");
     if (state.isFinal && isInspectedChoice(key) && !isInspectedOptimal(key)) classes.push("wrong");
     if (state.isFinal && !isInspectedChoice(key) && isInspectedOptimal(key)) classes.push("missing");
     return classes.join(" ");
@@ -345,19 +343,24 @@
     if (!state.isFinal) return;
     var ownTotal = 0;
     var optimalTotal = 0;
-    els.roundResults.innerHTML = "";
+    var header = ["<th></th>"];
+    var player = ["<th>Spelaren</th>"];
+    var optimum = ["<th>Optimum</th>"];
     state.history.forEach(function (round) {
       ownTotal += round.selectedTotal;
       optimalTotal += round.optimalTotal;
-      var row = document.createElement("div");
-      row.className = "roundResult";
-      if (round.round === state.inspectedRound) row.className += " inspected";
-      row.innerHTML = "<span>Rond " + round.round + "</span><strong>" +
-        round.selectedTotal + " / " + round.optimalTotal + "</strong>";
-      els.roundResults.appendChild(row);
+      var inspected = round.round === state.inspectedRound ? " class=\"inspected\"" : "";
+      header.push("<th" + inspected + ">r" + round.round + "</th>");
+      player.push("<td" + inspected + ">" + round.selectedTotal + "</td>");
+      optimum.push("<td" + inspected + ">" + round.optimalTotal + "</td>");
     });
-    els.ownGrandTotal.textContent = String(ownTotal);
-    els.optimalGrandTotal.textContent = String(optimalTotal);
+    header.push("<th>totalt</th>");
+    player.push("<td>" + ownTotal + "</td>");
+    optimum.push("<td>" + optimalTotal + "</td>");
+    els.roundResults.innerHTML = "<table class=\"statsTable\"><thead><tr>" +
+      header.join("") + "</tr></thead><tbody><tr>" +
+      player.join("") + "</tr><tr>" +
+      optimum.join("") + "</tr></tbody></table>";
     els.inspectRoundText.textContent = "Rond " + state.inspectedRound;
     els.prevRoundButton.disabled = state.inspectedRound <= 1;
     els.nextRoundButton.disabled = state.inspectedRound >= state.totalRounds;

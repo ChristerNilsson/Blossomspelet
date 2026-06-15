@@ -109,8 +109,7 @@ p {
 }
 
 .summary > div,
-.resultGrid > div,
-.roundResult {
+.statsTable {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -137,26 +136,32 @@ p {
   margin-bottom: 14px;
 }
 
-.resultGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
 .roundResults {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.roundResult {
-  box-shadow: none;
+.statsTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-variant-numeric: tabular-nums;
 }
 
-.roundResult.inspected {
-  border-color: #1e709c;
-  box-shadow: inset 0 0 0 2px #1e709c;
+.statsTable th,
+.statsTable td {
+  padding: 8px 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.statsTable th:first-child {
+  text-align: left;
+}
+
+.statsTable .inspected {
+  background: #e4f4ff;
+  color: #123a50;
 }
 
 .finalNav {
@@ -267,6 +272,12 @@ p {
   box-shadow: inset 0 0 0 2px var(--good-border);
 }
 
+.cell.unchanged {
+  background: #fff4c7;
+  border-color: #b68a1f;
+  box-shadow: inset 0 0 0 2px #b68a1f;
+}
+
 .cell.wrong {
   background: var(--bad);
   border-color: var(--bad-border);
@@ -311,10 +322,6 @@ p {
   }
 
   .summary {
-    grid-template-columns: 1fr;
-  }
-
-  .resultGrid {
     grid-template-columns: 1fr;
   }
 
