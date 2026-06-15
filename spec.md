@@ -7,6 +7,11 @@ Inga celler ska vara utgråade.
 Skapa en readme till nya användare. Den ska kunna innehålla åäö.
 Ge en bra introduktion till nybörjare istf ```Klicka par i matrisen. Samma val markeras åt båda håll.```
 
+Tag bort de tre redundanta panelerna med följande rubriker:
+* Rond
+* Vald summa
+* optimal summa
+
 ## Målsättning
 
 Ur en lista med el0-tal, ska de par väljas ut som minimerar den absoluta elo-differensen.
@@ -52,9 +57,6 @@ Därför finns knapparna, *rond-1* och *rond+1*
 Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd, gul och grönmarkering som tidigare.
 Här visas bara elodiffar i cellerna.
 
-MISSA INTE: Tag bort de tre redundanta panelerna med rubrikerna *Rond*, *Vald summa*, *optimal summa*.
-
-Byt
 
 ```
 Din total

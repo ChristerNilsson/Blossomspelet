@@ -24,10 +24,6 @@
     playerCount: document.getElementById("playerCount"),
     newGameButton: document.getElementById("newGameButton"),
     statusText: document.getElementById("statusText"),
-    roundSummary: document.getElementById("roundSummary"),
-    roundText: document.getElementById("roundText"),
-    selectedTotal: document.getElementById("selectedTotal"),
-    optimalTotal: document.getElementById("optimalTotal"),
     finalResults: document.getElementById("finalResults"),
     roundResults: document.getElementById("roundResults"),
     prevRoundButton: document.getElementById("prevRoundButton"),
@@ -318,12 +314,7 @@
 
   function render() {
     var selectedComplete = state.selected.size === state.elos.length / 2;
-    var inspected = inspectedHistory();
     els.statusText.textContent = statusMessage();
-    els.roundText.textContent = state.isFinal ? state.inspectedRound + "/" + state.totalRounds : state.round + "/" + state.totalRounds;
-    els.selectedTotal.textContent = state.isFinal && inspected ? String(inspected.selectedTotal) : String(totalFor(state.selected));
-    els.optimalTotal.textContent = state.isFinal && inspected ? String(inspected.optimalTotal) : state.revealed ? String(totalFor(state.optimal)) : "-";
-    els.roundSummary.hidden = state.isFinal;
     els.finalResults.hidden = !state.isFinal;
     renderFinalResults();
     els.clearButton.disabled = state.isFinal || state.revealed || state.selected.size === 0;

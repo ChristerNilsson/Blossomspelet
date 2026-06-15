@@ -101,14 +101,6 @@ p {
   font-weight: 700;
 }
 
-.summary {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.summary > div,
 .statsTable {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -117,7 +109,6 @@ p {
   box-shadow: var(--shadow);
 }
 
-.summary span,
 .finalResults span {
   display: block;
   color: var(--muted);
@@ -125,7 +116,6 @@ p {
   font-weight: 700;
 }
 
-.summary strong,
 .finalResults strong {
   display: block;
   margin-top: 3px;
@@ -321,10 +311,6 @@ p {
 
   .controls label {
     grid-column: 1 / -1;
-  }
-
-  .summary {
-    grid-template-columns: 1fr;
   }
 
   .matrix {
