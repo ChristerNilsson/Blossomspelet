@@ -255,9 +255,9 @@
       if (state.round >= state.totalRounds) {
         return "Rödmarkerade par ska bort. Gröna par ingår i optimal lösning.";
       }
-      return "Rödmarkerade par ska bort. Gröna par ingår i optimal lösning inför nästa rond.";
+      return "Rödmarkerade ej optimala. Gula par är optimala. Gröna par tillkommer";
     }
-    return "Målet är att para ihop alla spelare så jämnt som möjligt. Välj par i matrisen tills alla spelare ingår en gång.";
+    return "Målet är att para ihop spelarna så jämnt som möjligt. Välj par i matrisen tills alla spelare ingår en gång.";
   }
 
   function cellClass(key, isDiagonal, isLocked) {
