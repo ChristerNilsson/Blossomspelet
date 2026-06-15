@@ -24,7 +24,7 @@ I nästa rond visas samma matris, men tidigare valda par är blockerade och visa
 
 ## Final
 
-Efter sista ronden visas en resultatvy. Tabellen visar din summa, optimal summa per rond och totalerna. Klicka på en rond i tabellen för att inspektera den. Matrisen visar då Elo-differenserna och markerar dina val mot optimum med samma röd/gul/grön logik.
+Resultatpanelen visas hela tiden med raderna `Rond`, `Min summa` och `Optimal summa`. Under spelet fylls aktuell rond i när det finns resultat. Efter sista ronden kan du klicka på en rond i tabellen för att inspektera den. Matrisen visar då Elo-differenserna och markerar dina val mot optimum med samma röd/gul/grön logik.
 
 ## Delbar länk
 

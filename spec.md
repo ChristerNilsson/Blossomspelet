@@ -1,5 +1,8 @@
 # Blossomspelet
 
+Panelen med tre rader ska alltid visas. 
+Man vill kunna se rondnummer och resultat.
+
 Byt `Mina val` till `Min summa`
 Byt `Optimum` till `Optimal summa`
 

@@ -312,7 +312,7 @@
   function render() {
     var selectedComplete = state.selected.size === state.elos.length / 2;
     els.statusText.textContent = statusMessage();
-    els.finalResults.hidden = !state.isFinal;
+    els.finalResults.hidden = false;
     renderFinalResults();
     els.clearButton.disabled = state.isFinal || state.revealed || state.selected.size === 0;
     els.nextButton.textContent = state.revealed && state.round < state.totalRounds ? "Nästa rond" : "Nästa";
@@ -328,25 +328,56 @@
     renderMatrix();
   }
 
+  function roundResult(roundNumber) {
+    var saved = state.history[roundNumber - 1];
+    if (saved) return saved;
+    if (!state.isFinal && roundNumber === state.round) {
+      return {
+        round: roundNumber,
+        selectedTotal: state.selected.size > 0 ? totalFor(state.selected) : null,
+        optimalTotal: state.revealed ? totalFor(state.optimal) : null
+      };
+    }
+    return null;
+  }
+
+  function scoreText(value) {
+    return value === null || value === undefined ? "" : String(value);
+  }
+
   function renderFinalResults() {
-    if (!state.isFinal) return;
-    var ownTotal = 0;
-    var optimalTotal = 0;
+    var ownTotalSum = 0;
+    var optimalTotalSum = 0;
+    var hasOwnTotal = false;
+    var hasOptimalTotal = false;
     var header = ["<th>Rond</th>"];
     var player = ["<th>Min summa</th>"];
     var optimum = ["<th>Optimal summa</th>"];
-    state.history.forEach(function (round) {
-      ownTotal += round.selectedTotal;
-      optimalTotal += round.optimalTotal;
-      var inspected = round.round === state.inspectedRound ? " inspected" : "";
-      var roundAttr = " class=\"roundCell" + inspected + "\" data-round=\"" + round.round + "\"";
-      header.push("<th" + roundAttr + ">" + round.round + "</th>");
-      player.push("<td" + roundAttr + ">" + round.selectedTotal + "</td>");
-      optimum.push("<td" + roundAttr + ">" + round.optimalTotal + "</td>");
-    });
+    for (var roundNumber = 1; roundNumber <= state.totalRounds; roundNumber++) {
+      var round = roundResult(roundNumber);
+      var hasSavedRound = Boolean(state.history[roundNumber - 1]);
+      var inspected = state.isFinal && roundNumber === state.inspectedRound ? " inspected" : "";
+      var clickable = state.isFinal && hasSavedRound;
+      var roundAttr = clickable
+        ? " class=\"roundCell" + inspected + "\" data-round=\"" + roundNumber + "\""
+        : inspected ? " class=\"inspected\"" : "";
+      var selectedTotal = round ? round.selectedTotal : null;
+      var roundOptimalTotal = round ? round.optimalTotal : null;
+      if (selectedTotal !== null && selectedTotal !== undefined) {
+        ownTotalSum += selectedTotal;
+        hasOwnTotal = true;
+      }
+      if (roundOptimalTotal !== null && roundOptimalTotal !== undefined) {
+        optimalTotalSum += roundOptimalTotal;
+        hasOptimalTotal = true;
+      }
+      header.push("<th" + roundAttr + ">" + roundNumber + "</th>");
+      player.push("<td" + roundAttr + ">" + scoreText(selectedTotal) + "</td>");
+      optimum.push("<td" + roundAttr + ">" + scoreText(roundOptimalTotal) + "</td>");
+    }
     header.push("<th>total</th>");
-    player.push("<td>" + ownTotal + "</td>");
-    optimum.push("<td>" + optimalTotal + "</td>");
+    player.push("<td>" + scoreText(hasOwnTotal ? ownTotalSum : null) + "</td>");
+    optimum.push("<td>" + scoreText(hasOptimalTotal ? optimalTotalSum : null) + "</td>");
     els.roundResults.innerHTML = "<table class=\"statsTable\"><thead><tr>" +
       header.join("") + "</tr></thead><tbody><tr>" +
       player.join("") + "</tr><tr>" +
