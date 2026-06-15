@@ -5,6 +5,7 @@ Ska även fungera på iPad.
 Heltalen i matrisens celler ska alltid vara centrerade
 Inga celler ska vara utgråade.
 Skapa en readme till nya användare. Den ska kunna innehålla åäö.
+Ge en bra introduktion till nybörjare istf ```Klicka par i matrisen. Samma val markeras åt båda håll.```
 
 ## Målsättning
 
