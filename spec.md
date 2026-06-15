@@ -2,6 +2,7 @@
 
 UTF-8
 Ska även fungera på iPad.
+Heltalen i matrisens celler ska alltid vara centrerade
 
 ## Målsättning
 
@@ -47,6 +48,8 @@ Därför finns knapparna, *rond-1* och *rond+1*
 
 Dessa ronder ska visa både spelarens val och den optimala lösningen. Med röd, gul och grönmarkering som tidigare.
 Här visas bara elodiffar i cellerna.
+
+Tag bort de tre redundanta panelerna Rond, Vald summa, optimal summa.
 
 Byt
 
