@@ -1,5 +1,7 @@
 # Blossomspelet
 
+[Try it!](https://christernilsson.github.io/Blossomspelet)
+
 Blossomspelet är ett webbaserat spel där du parar spelare så att Elo-skillnaderna blir så jämna som möjligt. Appen skapar en slumpad Elo-lista, visar en matris med skillnader mellan alla spelare och jämför dina val med en optimal lösning.
 
 ## Kom igång
